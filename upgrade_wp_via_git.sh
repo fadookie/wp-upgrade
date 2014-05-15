@@ -40,7 +40,7 @@ function halt {
 function confirmAndPerform {
     local PROMPT_PREFIX="$1"
     #$2/cmdArray is a bash array of strings that will be safely expanded into the resulting command
-    declare -a cmdArray=("${!2}")
+    local cmdArray=("${!2}")
     local readPrompt="${PROMPT_PREFIX} via '${cmdArray[@]}'? [yn]"
     read -p "${readPrompt}" answer
     if [[ ! $answer = y ]] ; then
