@@ -47,7 +47,7 @@ function confirmAndPerform {
 }
 
 
-confirmAndPerform "Back up DB" "${SCRIPT_PATH}/mainsite_backup.sh"
+confirmAndPerform "Back up DB" "${SCRIPT_PATH}/wp_db_backup.sh"
 
 set -x
 git fetch wordpress --tags

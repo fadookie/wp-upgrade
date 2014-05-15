@@ -20,8 +20,10 @@ source "${SCRIPT_PATH}/shared_config.sh"
 
 #cd to wordpress root
 set -x
-cd "${SCFG_PATH_TO_WP_ROOT}"
+cd -P "${SCFG_PATH_TO_WP_ROOT}"
 set +x
+
+REALPATH_TO_WP_ROOT=`pwd`
 
 #Call external PHP script to read wp-config.php and evaluate as bash variables
 eval_wp-config() {
@@ -30,7 +32,7 @@ eval_wp-config() {
     set +o errexit
     set -x
     #config_dump.php reads wp-config.php and prints the wordpress DB connection PHP constants as shell variables.
-    configDump=$( php "${SCRIPT_PATH}/config_dump.php" "${SCRIPT_PATH}/${SCFG_PATH_TO_WP_ROOT}" )
+    configDump=$( php "${SCRIPT_PATH}/config_dump.php" "${REALPATH_TO_WP_ROOT}" )
     PHP_RC="$?"
     set +x
     set -o errexit
