@@ -38,36 +38,43 @@ function halt {
 }
 
 function confirmAndPerform {
-    PROMPT_PREFIX="$1"
-    CMD="$2"
-    read -p "${PROMPT_PREFIX} via '${CMD}'? [yn]" answer
+    local PROMPT_PREFIX="$1"
+    #$2/cmdArray is a bash array of strings that will be safely expanded into the resulting command
+    declare -a cmdArray=("${!2}")
+    local readPrompt="${PROMPT_PREFIX} via '${cmdArray[@]}'? [yn]"
+    read -p "${readPrompt}" answer
     if [[ ! $answer = y ]] ; then
         halt
     fi
     set -x
-    eval $CMD
+    "${cmdArray[@]}"
     set +x
 }
 
-
-confirmAndPerform "Back up DB" "${SCRIPT_PATH}/wp_db_backup.sh"
+CMD=( "${SCRIPT_PATH}/wp_db_backup.sh" )
+confirmAndPerform "Back up DB" CMD[@]
 
 set -x
 git fetch wordpress --tags
 set +x
 
-confirmAndPerform "Rebase" "git rebase --onto ${NEWVERSION} ${OLDVERSION} HEAD"
+CMD=( git rebase --onto "${NEWVERSION}" "${OLDVERSION}" HEAD ) 
+confirmAndPerform "Rebase" CMD[@]
 
 # You will now be in a "detached head" state.
 
 NEWBRANCH="${SCFG_BRANCH_PREFIX}${NEWVERSION}"
 
-confirmAndPerform "Make branch" "git co -b '${NEWBRANCH}'"
+CMD=( git co -b "${NEWBRANCH}" )
+confirmAndPerform "Make branch" CMD[@]
 
-confirmAndPerform "Change file ownership" "chown '${SCFG_CHOWN_OWNER}' '${SCFG_PATH_TO_WP_ROOT}/${SCFG_CHOWN_DIR}'"
+CMD=( chown "${SCFG_CHOWN_OWNER}" "${SCFG_PATH_TO_WP_ROOT}/${SCFG_CHOWN_DIR}" )
+confirmAndPerform "Change file ownership" CMD[@]
 
 # Log in to admin, run DB upgrade script
 
-confirmAndPerform "Push to git remote" "git push -u origin '${NEWBRANCH}'"
+CMD=( git push -u origin "${NEWBRANCH}" )
+confirmAndPerform "Push to git remote" CMD[@]
 
-confirmAndPerform "Cleanup" "git gc"
+CMD=( git gc )
+confirmAndPerform "Cleanup" CMD[@]
