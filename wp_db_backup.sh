@@ -56,5 +56,7 @@ exec 3>${DESTFILE}
 
 set -x
 mysqldump --add-drop-table -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" | gzip >&3
+#set permissions mask -rw-rw----
+chmod 660 "${DESTFILE}"
 set +x
 echo "=====Wordpress database backup complete to $DESTFILE"
