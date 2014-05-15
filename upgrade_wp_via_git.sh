@@ -1,8 +1,27 @@
 #!/bin/bash
 # run from wordpress site root:
 # eliotbin/upgrade_wp_via_git.sh OLDVERSION NEWVERSION
-set -o nounset
-set -o errexit
+set -o nounset #disallow unset vars
+set -o errexit #strict error checking
+set -o pipefail #commands in pipes can cause fatal errors
+
+#Jump through an astounding number of hoops to get the canonical path to this script
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+if ([ -h "${SCRIPT_PATH}" ]) then
+  while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${SCRIPT_PATH}` > /dev/null
+SCRIPT_PATH=`pwd`;
+popd  > /dev/null
+
+#Source shared config
+source "${SCRIPT_PATH}/shared_config.sh"
+
+#cd to wordpress root
+set -x
+cd "${SCFG_PATH_TO_WP_ROOT}"
+set +x
 
 set -x
 OLDVERSION="$1"
