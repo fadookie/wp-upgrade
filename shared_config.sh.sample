@@ -14,11 +14,14 @@ SCFG_PATH_TO_BACKUPS="${HOME}backup"
 #Filename prefix for sql dump gzip files
 SCFG_DB_BACKUP_FILENAME_PREFIX="mainsite.sql."
 
-#Chown user:group specifier string, used to restore ownership of "wp-content/uploads/" and potentially others after upgrading
-SCFG_CHOWN_WEB=":web"
-
 #Prefix for git branches. The wordpress version will be appended to it. This could be empty, but it may cause confusion as then the branch's shortname would be the same as the name of the official wordpress tag. 
 SCFG_BRANCH_PREFIX="mainsite/"
+
+#Chown user:group specifier string, will be applied as the owner of SCFG_CHOWN_DIR after upgrading
+SCFG_CHOWN_OWNER=":web"
+
+#SCFG_CHOWN_OWNER will be granted ownership of these files after upgrading
+SCFG_CHOWN_DIR="wp-content/uploads/"
 
 
 ### Global script defaults ###

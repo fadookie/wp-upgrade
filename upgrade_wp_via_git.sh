@@ -45,7 +45,7 @@ function confirmAndPerform {
         halt
     fi
     set -x
-    $CMD
+    eval $CMD
     set +x
 }
 
@@ -62,14 +62,12 @@ confirmAndPerform "Rebase" "git rebase --onto ${NEWVERSION} ${OLDVERSION} HEAD"
 
 NEWBRANCH="${SCFG_BRANCH_PREFIX}${NEWVERSION}"
 
-confirmAndPerform "Make branch" "git co -b ${NEWBRANCH}"
+confirmAndPerform "Make branch" "git co -b '${NEWBRANCH}'"
 
-set -x
-chown "${SCFG_CHOWN_WEB}" wp-content/uploads/
-set +x
+confirmAndPerform "Change file ownership" "chown '${SCFG_CHOWN_OWNER}' '${SCFG_PATH_TO_WP_ROOT}/${SCFG_CHOWN_DIR}'"
 
 # Log in to admin, run DB upgrade script
 
-confirmAndPerform "Push to github" "git push -u origin ${NEWBRANCH}"
+confirmAndPerform "Push to git remote" "git push -u origin '${NEWBRANCH}'"
 
 confirmAndPerform "Cleanup" "git gc"
