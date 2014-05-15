@@ -1,6 +1,9 @@
 #!/bin/bash
 # First, set path to wordpress site root in shared_config.sh.
 # then run like so: PATH/TO/upgrade_wp_via_git.sh OLDVERSION NEWVERSION
+#
+# Copyright (c) 2014 Eliot Lash.
+# This software is available for use under an MIT-style license, see LICENSE.txt for full details.
 
 set -o nounset #disallow unset vars
 set -o errexit #strict error checking

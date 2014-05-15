@@ -3,6 +3,9 @@
  * Reads wp-config.php and prints the wordpress DB connection PHP constants as shell variables.
  * Intended for use to inject these config variables into shell scripts.
  * Expects one argument: absolute path to wordpress installation root directory.
+ *
+ * Copyright (c) 2014 Eliot Lash.
+ * This software is available for use under an MIT-style license, see LICENSE.txt for full details.
  */
 
 $PATH_TO_WP_ROOT = (isset($argv[1])) ? $argv[1] : null;

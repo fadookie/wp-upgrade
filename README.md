@@ -34,3 +34,8 @@ The script will back up your database, then perform a rebase of all of your comm
 
 Once the upgrade is done, log in to your wordpress admin panel to check if a database upgrade is needed and execute it.
 If you wish, you can also make another database backup at this point by running `wp_db_backup.sh`.
+
+## Legal
+Copyright (c) 2014 Eliot Lash.
+
+This software is available for use under an MIT-style license, see [LICENSE.txt](/LICENSE.txt) for full details.

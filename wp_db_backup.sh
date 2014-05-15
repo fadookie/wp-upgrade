@@ -1,5 +1,8 @@
 #!/bin/bash
 # Database backup helper for upgrade_wp_via_git.sh. Can be run standalone to make a DB backup.
+#
+# Copyright (c) 2014 Eliot Lash.
+# This software is available for use under an MIT-style license, see LICENSE.txt for full details.
 
 set -o nounset #disallow unset vars
 set -o errexit #strict error checking

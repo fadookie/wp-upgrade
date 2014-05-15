@@ -1,5 +1,8 @@
-#This file contains settings used by all shell scripts in this folder.
-#Copy this sample file to script_config.sh and edit the user settings to match your machine.
+# This file contains settings used by all shell scripts in this folder.
+# Copy this sample file to script_config.sh and edit the user settings to match your machine.
+#
+# Copyright (c) 2014 Eliot Lash.
+# This software is available for use under an MIT-style license, see LICENSE.txt for full details.
 
 ### User settings ###
 #Path from this script to wordpress root (containing wp-config.php, etc.) - should work as absolute or relative
