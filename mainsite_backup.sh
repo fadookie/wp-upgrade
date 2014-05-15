@@ -1,4 +1,6 @@
 #!/bin/bash
+# Database backup helper for upgrade_wp_via_git.sh. Can be run standalone to make a DB backup.
+
 set -o nounset #disallow unset vars
 set -o errexit #strict error checking
 set -o pipefail #commands in pipes can cause fatal errors
@@ -42,7 +44,7 @@ eval_wp-config() {
 eval_wp-config
 
 TIMESTAMP=`date "+%y%m%d_%H%M%s"`
-DESTFILE="${HOME}backup/mainsite.sql.$TIMESTAMP.gz"
+DESTFILE="${SCFG_PATH_TO_BACKUPS}/${SCFG_DB_BACKUP_FILENAME_PREFIX}${TIMESTAMP}.gz"
 
 #Make 3 a descriptor to DESTFILE:
 exec 3>${DESTFILE}
