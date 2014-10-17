@@ -8,12 +8,12 @@ Git-based upgrade toolchain for wordpress.
  1. Edit `shared_config.sh` and update the **User settings** to match your environment and preferences.
 
 ## Setup git-based wordpress
- 1. Clone the wordpress git mirror. I use the older https://github.com/WordPress/WordPress, but you should be able to use the newer official one at `git://develop.git.wordpress.org/`
+ 1. Clone the wordpress git mirror. I use the older https://github.com/WordPress/WordPress, but you should be able to use the newer official one at `git://core.git.wordpress.org/`
  1. cd into the clone
  1. `git fetch --tags`
  1. `git tag` to see the tags. The latest stable version should be the highest version number in a tag, I'll call this `<current-wordpress-version>`.
  1. `git checkout -b mainsite/<current-wordpress-version>` (I use `mainsite/` as a prefix for my wordpress site branches, and it's followed by the version that my changes are based off of.)
- 1. `git reset --hard <current-wordpress-version>` (This points the branch you just made at `<current-wordpress-version>`.)
+ 1. `git reset --hard refs/remotes/origin/<current-wordpress-version>` (This points the branch you just made at `<current-wordpress-version>`.)
  1. `git remote rename origin wordpress`
  1. Set up a git remote for backup purposes.
  1. `git remote add origin <url-of-remote>`
