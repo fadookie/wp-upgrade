@@ -15,7 +15,7 @@ SCFG_PATH_TO_BACKUPS="${HOME}backup"
 SCFG_DB_BACKUP_FILENAME_PREFIX="mainsite.sql."
 
 #Which remote to fetch new versions of wordpress from? This will be 'origin' if you cloned directly from their git repo.
-SCFG_REMOTE_NAME="origin"
+SCFG_UPSTREAM_REMOTE_NAME="origin"
 
 #Prefix for git branches. The wordpress version will be appended to it. This could be empty, but it may cause confusion as then the branch's shortname would be the same as the name of the official wordpress tag. 
 SCFG_BRANCH_PREFIX="mainsite/"
@@ -25,6 +25,12 @@ SCFG_CHOWN_OWNER=":web"
 
 #SCFG_CHOWN_OWNER will be granted ownership of these files after upgrading
 SCFG_CHOWN_DIR="wp-content/uploads/"
+
+#Push to a remote if we upgrade successfully? If you don't want this, change it to false
+SCFG_DO_PUSH=true
+
+#Which remote to push to if SCFG_DO_PUSH is true. This needs to be a repo you have push access to, such as a personal github fork.
+SCFG_PUSH_REMOTE_NAME="MY_BACKUP_REMOTE"
 
 
 ### Global script defaults ###

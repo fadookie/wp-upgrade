@@ -55,7 +55,7 @@ CMD=( "${SCRIPT_PATH}/wp_db_backup.sh" )
 confirmAndPerform "Back up DB" CMD[@]
 
 set -x
-git fetch --tag --unshallow "${SCFG_REMOTE_NAME}" "${NEWVERSION}"
+git fetch --tag --unshallow "${SCFG_UPSTREAM_REMOTE_NAME}" "${NEWVERSION}"
 set +x
 
 CMD=( git rebase --onto "${NEWVERSION}" "${OLDVERSION}" HEAD ) 
@@ -73,8 +73,12 @@ confirmAndPerform "Change file ownership" CMD[@]
 
 # Log in to admin, run DB upgrade script
 
-CMD=( git push -u origin "${NEWBRANCH}" )
-confirmAndPerform "Push to git remote" CMD[@]
+if [ "${SCFG_DO_PUSH}" = true ]; then
+    CMD=( git push -u "${SCFG_PUSH_REMOTE_NAME}" "${NEWBRANCH}" )
+    confirmAndPerform "Push to git remote" CMD[@]
+else
+    echo "SCFG_DO_PUSH was set to false, skipping push."
+fi
 
 CMD=( git gc )
 confirmAndPerform "Cleanup" CMD[@]
