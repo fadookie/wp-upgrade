@@ -55,7 +55,7 @@ CMD=( "${SCRIPT_PATH}/wp_db_backup.sh" )
 confirmAndPerform "Back up DB" CMD[@]
 
 set -x
-git fetch wordpress --tags
+git fetch --tag --unshallow "${SCFG_REMOTE_NAME}" "${NEWVERSION}"
 set +x
 
 CMD=( git rebase --onto "${NEWVERSION}" "${OLDVERSION}" HEAD ) 
