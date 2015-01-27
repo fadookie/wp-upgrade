@@ -68,8 +68,8 @@ NEWBRANCH="${SCFG_BRANCH_PREFIX}${NEWVERSION}"
 CMD=( git co -b "${NEWBRANCH}" )
 confirmAndPerform "Make branch" CMD[@]
 
-CMD=( chown "${SCFG_CHOWN_OWNER}" "${SCFG_PATH_TO_WP_ROOT}/${SCFG_CHOWN_DIR}" )
-confirmAndPerform "Change file ownership" CMD[@]
+CMD=( "${SCRIPT_PATH}/wp_fix_perms.sh" )
+confirmAndPerform "Fix file permissions" CMD[@]
 
 # Log in to admin, run DB upgrade script
 
